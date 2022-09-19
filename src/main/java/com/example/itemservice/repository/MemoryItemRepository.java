@@ -1,16 +1,13 @@
-package com.example.itemservice.repository.memory;
+package com.example.itemservice.repository;
 
 import com.example.itemservice.domain.Item;
-import com.example.itemservice.repository.ItemRepository;
-import com.example.itemservice.repository.ItemSearchCond;
-import com.example.itemservice.repository.ItemUpdateDto;
-import org.springframework.stereotype.Repository;
+import com.example.itemservice.domain.ItemSearchCondition;
 import org.springframework.util.ObjectUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Repository
+//@Repository
 public class MemoryItemRepository implements ItemRepository {
 
     private static final Map<Long, Item> store = new HashMap<>(); //static
@@ -24,11 +21,11 @@ public class MemoryItemRepository implements ItemRepository {
     }
 
     @Override
-    public void update(Long itemId, ItemUpdateDto updateParam) {
-        Item findItem = findById(itemId).orElseThrow();
-        findItem.setItemName(updateParam.getItemName());
-        findItem.setPrice(updateParam.getPrice());
-        findItem.setQuantity(updateParam.getQuantity());
+    public void update(Item updateItem) {
+        Item findItem = findById(updateItem.getId()).orElseThrow();
+        findItem.setItemName(updateItem.getItemName());
+        findItem.setPrice(updateItem.getPrice());
+        findItem.setQuantity(updateItem.getQuantity());
     }
 
     @Override
@@ -37,9 +34,11 @@ public class MemoryItemRepository implements ItemRepository {
     }
 
     @Override
-    public List<Item> findAll(ItemSearchCond cond) {
-        String itemName = cond.getItemName();
-        Integer maxPrice = cond.getMaxPrice();
+    public List<Item> findAll(ItemSearchCondition condition) {
+        System.out.println("condition = " + condition);
+
+        String itemName = condition.getItemName();
+        Integer maxPrice = condition.getMaxPrice();
         return store.values().stream()
                 .filter(item -> {
                     if (ObjectUtils.isEmpty(itemName)) {

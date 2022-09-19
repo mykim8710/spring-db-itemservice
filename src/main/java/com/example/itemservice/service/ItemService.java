@@ -1,21 +1,21 @@
 package com.example.itemservice.service;
 
-import com.example.itemservice.repository.ItemSearchCond;
-import com.example.itemservice.repository.ItemUpdateDto;
-import com.example.itemservice.domain.Item;
+import com.example.itemservice.web.dto.request.RequestItemInsertDto;
+import com.example.itemservice.web.dto.request.RequestItemSelectDto;
+import com.example.itemservice.web.dto.request.RequestItemUpdateDto;
+import com.example.itemservice.web.dto.response.ResponseItemSelectDto;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ItemService {
 
-    Item save(Item item);
+    Long save(RequestItemInsertDto insertDto);
 
-    void update(Long itemId, ItemUpdateDto updateParam);
+    void update(Long itemId, RequestItemUpdateDto updateDto);
 
-    Optional<Item> findById(Long id);
+    ResponseItemSelectDto findById(Long id);
 
-    List<Item> findItems(ItemSearchCond itemSearch);
+    List<ResponseItemSelectDto> findItems(RequestItemSelectDto selectDto);
 
     void delete(Long itemId);
 }

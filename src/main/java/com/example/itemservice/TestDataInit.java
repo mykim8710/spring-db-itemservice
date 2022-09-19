@@ -2,6 +2,7 @@ package com.example.itemservice;
 
 import com.example.itemservice.domain.Item;
 import com.example.itemservice.repository.ItemRepository;
+import com.example.itemservice.web.dto.request.RequestItemInsertDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -19,8 +20,12 @@ public class TestDataInit {
     @EventListener(ApplicationReadyEvent.class)
     public void initData() {
         log.info("test data init");
-        itemRepository.save(new Item("itemA", 10000, 10));
-        itemRepository.save(new Item("itemB", 20000, 20));
+
+        Item itemA = Item.makeSaveModel(new RequestItemInsertDto("itemA", 10000, 10));
+        Item itemB = Item.makeSaveModel(new RequestItemInsertDto("itemB", 20000, 20));
+
+        itemRepository.save(itemA);
+        itemRepository.save(itemB);
     }
 
 }

@@ -15,8 +15,56 @@
 - Dependencies: **Spring Web**, **Thymeleaf**, **Lombok**
 
 ## Package Design
+- start
 ```
-
+└── src
+    ├── main
+    │   ├── java
+    │   │   └── com.example.itemservice
+    │   │               ├── config
+    │   │               │     └── MemoryConfig(C) 
+    │   │               ├── domain
+    │   │               │     ├── Item(C)           
+    │   │               │     └── ItemSearchCondition(C) 
+    │   │               ├── exception
+    │   │               │     └── NotFoundException(C) 
+    │   │               ├── repository
+    │   │               │     ├── ItemRepository(I) 
+    │   │               │     └── MemoryItemRepository(C)
+    │   │               ├── service
+    │   │               │     ├── ItemService(I)           
+    │   │               │     └── ItemServiceImplV1(C) 
+    │   │               ├──  web
+    │   │               │      ├── controller
+    │   │               │      │     ├── HomeController(C)
+    │   │               │      │     └── ItemController(C)
+    │   │               │      └──  dto
+    │   │               │            ├──  request
+    │   │               │            │      ├── RequestItemInsertDto(C)
+    │   │               │            │      ├── RequestItemUpdateDto(C)
+    │   │               │            │      └── RequestItemSelectDto(C)
+    │   │               │            └──  response
+    │   │               │                   └── ResponseItemSelectDto(C)
+    │   │               ├── TestDataInit(C)
+    │   │               └── ItemServiceApplication(C)
+    │   └── resource
+    │       ├── static
+    │       │     ├──  css 
+    │       │     │      └── bootstrap.min.css
+    │       │     └── index.html
+    │       ├── template
+    │       │     ├──  css 
+    │       │     │      └── bootstrap.min.css
+    │       │     ├── item.html    
+    │       │     ├── items.html   
+    │       │     ├── addForm.html 
+    │       │     └── editForm.html
+    │       └── application.properties
+    ├── test
+    │   ├── java
+    │   │   └── com.example.itemservice
+    │   │                       └── repository
+    │   │                                └── ItemRepositoryTest(C)
 ```
 
 ## 

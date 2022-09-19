@@ -1,17 +1,15 @@
-package com.example.itemservice.web;
+package com.example.itemservice.web.controller;
 
-import com.example.itemservice.domain.Item;
-import com.example.itemservice.repository.ItemSearchCond;
-import com.example.itemservice.repository.ItemUpdateDto;
 import com.example.itemservice.service.ItemService;
+import com.example.itemservice.web.dto.request.RequestItemInsertDto;
+import com.example.itemservice.web.dto.request.RequestItemSelectDto;
+import com.example.itemservice.web.dto.request.RequestItemUpdateDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.List;
 
 @Slf4j
 @Controller
@@ -22,16 +20,14 @@ public class ItemController {
     private final ItemService itemService;
 
     @GetMapping
-    public String items(@ModelAttribute("itemSearch") ItemSearchCond itemSearch, Model model) {
-        List<Item> items = itemService.findItems(itemSearch);
-        model.addAttribute("items", items);
+    public String items(@ModelAttribute("itemSearch") RequestItemSelectDto selectDto, Model model) {
+        model.addAttribute("items", itemService.findItems(selectDto));
         return "items";
     }
 
     @GetMapping("/{itemId}")
     public String item(@PathVariable long itemId, Model model) {
-        Item item = itemService.findById(itemId).get();
-        model.addAttribute("item", item);
+        model.addAttribute("item", itemService.findById(itemId));
         return "item";
     }
 
@@ -41,23 +37,21 @@ public class ItemController {
     }
 
     @PostMapping("/add")
-    public String addItem(@ModelAttribute Item item, RedirectAttributes redirectAttributes) {
-        Item savedItem = itemService.save(item);
-        redirectAttributes.addAttribute("itemId", savedItem.getId());
+    public String addItem(@ModelAttribute("item") RequestItemInsertDto insertDto, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addAttribute("itemId", itemService.save(insertDto));
         redirectAttributes.addAttribute("status", true);
         return "redirect:/items/{itemId}";
     }
 
     @GetMapping("/{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model) {
-        Item item = itemService.findById(itemId).get();
-        model.addAttribute("item", item);
+        model.addAttribute("item", itemService.findById(itemId));
         return "editForm";
     }
 
     @PostMapping("/{itemId}/edit")
-    public String edit(@PathVariable Long itemId, @ModelAttribute ItemUpdateDto updateParam) {
-        itemService.update(itemId, updateParam);
+    public String edit(@PathVariable Long itemId, @ModelAttribute RequestItemUpdateDto updateDto) {
+        itemService.update(itemId, updateDto);
         return "redirect:/items/{itemId}";
     }
 
