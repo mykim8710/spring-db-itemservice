@@ -1,7 +1,7 @@
 package com.example.itemservice.config;
 
 import com.example.itemservice.repository.ItemRepository;
-import com.example.itemservice.repository.MemoryItemRepository;
+import com.example.itemservice.repository.memory.MemoryItemRepository;
 import com.example.itemservice.service.ItemService;
 import com.example.itemservice.service.ItemServiceImplV1;
 import org.springframework.context.annotation.Bean;

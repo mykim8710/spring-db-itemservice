@@ -2,8 +2,7 @@ package com.example.itemservice.repository;
 
 import com.example.itemservice.domain.Item;
 import com.example.itemservice.domain.ItemSearchCondition;
-import com.example.itemservice.repository.ItemRepository;
-import com.example.itemservice.repository.MemoryItemRepository;
+import com.example.itemservice.repository.memory.MemoryItemRepository;
 import com.example.itemservice.web.dto.request.RequestItemInsertDto;
 import com.example.itemservice.web.dto.request.RequestItemUpdateDto;
 import org.junit.jupiter.api.AfterEach;

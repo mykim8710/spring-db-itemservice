@@ -3,10 +3,9 @@ package com.example.itemservice.domain;
 import com.example.itemservice.web.dto.request.RequestItemInsertDto;
 import com.example.itemservice.web.dto.request.RequestItemUpdateDto;
 import com.example.itemservice.web.dto.response.ResponseItemSelectDto;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
+@NoArgsConstructor
 @Getter
 @ToString
 public class Item {

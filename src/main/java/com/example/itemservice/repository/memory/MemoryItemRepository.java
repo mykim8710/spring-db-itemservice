@@ -1,7 +1,8 @@
-package com.example.itemservice.repository;
+package com.example.itemservice.repository.memory;
 
 import com.example.itemservice.domain.Item;
 import com.example.itemservice.domain.ItemSearchCondition;
+import com.example.itemservice.repository.ItemRepository;
 import org.springframework.util.ObjectUtils;
 
 import java.util.*;
