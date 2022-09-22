@@ -32,6 +32,7 @@ public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
     public Item save(Item insertItem) {
         String sql = "insert into item(item_name, price, quantity) values(?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
+
         template.update(connection -> {
             // 자동 증가키
             PreparedStatement pstmt = connection.prepareStatement(sql, new String[]{"id"});
@@ -76,27 +77,40 @@ public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
         String itemName = condition.getItemName();
         Integer maxPrice = condition.getMaxPrice();
 
+
         if (StringUtils.hasText(itemName) || maxPrice != null) {
             sql += " where";
         }
 
         boolean andFlag = false;
+
         List<Object> param = new ArrayList<>();
+
+        // 동적쿼리
         if (StringUtils.hasText(itemName)) {
             sql += " item_name like concat('%',?,'%')";
             param.add(itemName);
             andFlag = true;
         }
 
+        if(maxPrice != null) {
+            if(andFlag) {
+                sql += " and";
+            }
 
+            sql += " price <= ?";
+            param.add(maxPrice);
+        }
 
-        return null;
+        log.info("sql={}", sql);
+
+        return template.query(sql, itemRowMapper(), param.toArray());
     }
 
     @Override
     public void delete(Long itemId) {
         String sql = "delete from item where id = ?";
-
+        template.update(sql, itemId);
     }
 
     private RowMapper<Item> itemRowMapper() {
