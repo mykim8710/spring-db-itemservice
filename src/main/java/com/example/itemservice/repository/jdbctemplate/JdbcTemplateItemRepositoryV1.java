@@ -121,5 +121,6 @@ public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
             item.setPrice(rs.getInt("price"));
             item.setQuantity(rs.getInt("quantity"));
             return item;
-        }; }
+        };
+    }
 }
