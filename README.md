@@ -81,6 +81,20 @@ create table item (
 ```
 
 ## Study 내용
-1. JdbcTemplate
-- JdbcTemplate을 사용해서 메모리에 저장하던 데이터를 데이터베이스에 저장
+1. JdbcTemplate : JdbcTemplate을 사용해서 메모리에 저장하던 데이터를 데이터베이스에 저장
+- **주요 기능 :** JdbcTemplate이 제공하는 주요 기능은 다음과 같다.
+  - JdbcTemplate : 순서 기반 파라미터 바인딩을 지원한다.
+  - NamedParameterJdbcTemplate : 이름 기반 파라미터 바인딩을 지원한다. (권장)
+  - SimpleJdbcInsert : INSERT SQL을 편리하게 사용할 수 있다.
+  - SimpleJdbcCall : 스토어드 프로시저를 편리하게 호출할 수 있다.
+2. 데이터 접근 기술 - 테스트방법
+- DB 분리
+  - test전용 h2 db 생성 
+  - application.properties(/test)에 적용
+- 데이터 롤백
+  - @BeforeEach, @AfterEach 적용
+  - @Transactional
+- 임베디드 모드 DB(h2)
+  - src/test/resources/schema.sql
+    
 

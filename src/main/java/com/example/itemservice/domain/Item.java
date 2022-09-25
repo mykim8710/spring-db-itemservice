@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @ToString
+@EqualsAndHashCode
 public class Item {
     private Long id;
     private String itemName;
