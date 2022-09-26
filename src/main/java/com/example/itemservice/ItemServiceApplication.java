@@ -3,6 +3,7 @@ package com.example.itemservice;
 import com.example.itemservice.config.JdbcTemplateV2Config;
 import com.example.itemservice.config.JdbcTemplateV3Config;
 import com.example.itemservice.config.MemoryConfig;
+import com.example.itemservice.config.MyBatisConfig;
 import com.example.itemservice.repository.ItemRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
@@ -18,7 +19,8 @@ import javax.sql.DataSource;
 //@Import(MemoryConfig.class)
 //@Import(JdbcTemplateV1Config.class)
 //@Import(JdbcTemplateV2Config.class)
-@Import(JdbcTemplateV3Config.class)
+//@Import(JdbcTemplateV3Config.class)
+@Import(MyBatisConfig.class)
 @Slf4j
 @SpringBootApplication(scanBasePackages = "com.example.itemservice.web")
 public class ItemServiceApplication {

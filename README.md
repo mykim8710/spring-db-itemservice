@@ -96,5 +96,14 @@ create table item (
   - @Transactional
 - 임베디드 모드 DB(h2)
   - src/test/resources/schema.sql
-    
-
+3. Mybatis
+- JdbcTemplate보다 더 많은 기능을 제공하는 SQL Mapper
+- SQL을 XML에 편리하게 작성할 수 있고 또 동적 쿼리를 매우 편리하게 작성
+- MyBatis 설정
+  - application.properties
+- MyBatis 적용
+  - @Repository MyBatisItemRepository
+  - @Mapper ItemMapper(call at MyBatisItemRepository)
+- MyBatis 기능 
+  - 동적 쿼리
+  - 기타 기능(애너테이션 sql, 문자열 대체(${}), 재사용 가능한 SQL 조각(sql>), Result Maps)
