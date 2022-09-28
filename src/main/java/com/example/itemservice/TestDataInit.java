@@ -21,8 +21,17 @@ public class TestDataInit {
     public void initData() {
         log.info("test data init");
 
-        Item itemA = Item.makeSaveModel(new RequestItemInsertDto("itemA", 10000, 10));
-        Item itemB = Item.makeSaveModel(new RequestItemInsertDto("itemB", 20000, 20));
+        Item itemA = Item.builder()
+                            .itemName("itemA")
+                            .price(1000)
+                            .quantity(10)
+                            .build();
+
+        Item itemB = Item.builder()
+                            .itemName("itemB")
+                            .price(2000)
+                            .quantity(20)
+                            .build();
 
         itemRepository.save(itemA);
         itemRepository.save(itemB);

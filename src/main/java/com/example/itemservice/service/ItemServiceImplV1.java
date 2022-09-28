@@ -21,21 +21,36 @@ public class ItemServiceImplV1 implements ItemService {
     private final ItemRepository itemRepository;
 
     @Override
-    public Long save(RequestItemInsertDto insertDto) {
-        Item saveItem = Item.makeSaveModel(insertDto);
-        return itemRepository.save(saveItem).getId();
+    public Long save(RequestItemInsertDto dto) {
+        Item item = Item.builder()
+                            .itemName(dto.getItemName())
+                            .price(dto.getPrice())
+                            .quantity(dto.getQuantity())
+                            .build();
+        return itemRepository.save(item).getId();
     }
 
     @Override
-    public void update(Long itemId, RequestItemUpdateDto updateDto) {
-        Item updateItem = Item.makeUpdateModel(itemId, updateDto);
-        itemRepository.update(updateItem);
+    public void update(Long itemId, RequestItemUpdateDto dto) {
+        Item item = Item.builder()
+                            .id(itemId)
+                            .itemName(dto.getItemName())
+                            .price(dto.getPrice())
+                            .quantity(dto.getQuantity())
+                            .build();
+        itemRepository.update(item);
     }
 
     @Override
     public ResponseItemSelectDto findById(Long id) {
         Item item = itemRepository.findById(id).orElseThrow(() -> new NotFoundException("Not Found this item"));
-        return item.toResponseItemSelectDto();
+
+        return ResponseItemSelectDto.builder()
+                                        .id(item.getId())
+                                        .itemName(item.getItemName())
+                                        .price(item.getPrice())
+                                        .quantity(item.getQuantity())
+                                        .build();
     }
 
     @Override
@@ -46,7 +61,12 @@ public class ItemServiceImplV1 implements ItemService {
         if(items.size() > 0){
             responseItemSelectDtos.addAll(items
                                             .stream()
-                                            .map(Item -> Item.toResponseItemSelectDto())
+                                            .map(Item -> ResponseItemSelectDto.builder()
+                                                                                .id(Item.getId())
+                                                                                .itemName(Item.getItemName())
+                                                                                .price(Item.getPrice())
+                                                                                .quantity(Item.getQuantity())
+                                                                                .build())
                                             .collect(Collectors.toList())
             );
         }

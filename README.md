@@ -107,3 +107,17 @@ create table item (
 - MyBatis 기능 
   - 동적 쿼리
   - 기타 기능(애너테이션 sql, 문자열 대체(${}), 재사용 가능한 SQL 조각(sql>), Result Maps)
+4. JPA(Java Persistence API)
+- 자바 진영의 ORM(Object Relational Mapping) 기술 표준
+- JPA는 애플리케이션과 JDBC 사이에서 동작
+- JdbcTemplate이나 MyBatis 같은 SQL 매퍼 기술은 SQL을 개발자가 직접 작성해야 하지만, JPA를 사용하면 SQL도 JPA가 대신 작성하고 처리
+- 실무에서는 JPA를 더욱 편리하게 사용하기 위해 스프링 데이터 JPA와 Querydsl이라는 기술을 함께 사용
+- JPA 설정 : implementation 'org.springframework.boot:spring-boot-starter-data-jpa'(build.gradle)
+- JPA 적용
+  - Domain 객체 : orm mapping
+  - Repository
+    - 저장
+    - 수정
+    - 단건조회
+    - 목록조회(jpql)
+    - 삭제

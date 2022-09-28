@@ -3,14 +3,10 @@ package com.example.itemservice.repository;
 import com.example.itemservice.domain.Item;
 import com.example.itemservice.domain.ItemSearchCondition;
 import com.example.itemservice.repository.memory.MemoryItemRepository;
-import com.example.itemservice.web.dto.request.RequestItemInsertDto;
-import com.example.itemservice.web.dto.request.RequestItemUpdateDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -41,8 +37,11 @@ class ItemRepositoryTest {
     @Test
     void save() {
         // given
-        RequestItemInsertDto insertDto = new RequestItemInsertDto("itemA", 10000, 10);
-        Item item = Item.makeSaveModel(insertDto);
+        Item item = Item.builder()
+                            .itemName("itemA")
+                            .price(1000)
+                            .quantity(10)
+                            .build();
 
         // when
         Item savedItem = itemRepository.save(item);
@@ -66,34 +65,52 @@ class ItemRepositoryTest {
     @Test
     void updateItem() {
         //given
-        RequestItemInsertDto insertDto = new RequestItemInsertDto("itemA", 10000, 10);
-        Item saveItem = Item.makeSaveModel(insertDto);
+        Item saveItem = Item.builder()
+                                .itemName("itemA")
+                                .price(1000)
+                                .quantity(10)
+                                .build();
         Item savedItem = itemRepository.save(saveItem);
         Long itemId = savedItem.getId();
 
         //when
-        RequestItemUpdateDto updateDto = new RequestItemUpdateDto("item2", 20000, 30);
-        Item updateItem = Item.makeUpdateModel(itemId, updateDto);
+        Item updateItem = Item.builder()
+                                .id(itemId)
+                                .itemName("itemB")
+                                .price(20000)
+                                .quantity(20)
+                                .build();
+
         itemRepository.update(updateItem);
 
         // then
         Item findItem = itemRepository.findById(itemId).get();
-        assertThat(findItem.getItemName()).isEqualTo(updateDto.getItemName());
-        assertThat(findItem.getPrice()).isEqualTo(updateDto.getPrice());
-        assertThat(findItem.getQuantity()).isEqualTo(updateDto.getQuantity());
+
+        assertThat(findItem.getItemName()).isEqualTo(updateItem.getItemName());
+        assertThat(findItem.getPrice()).isEqualTo(updateItem.getPrice());
+        assertThat(findItem.getQuantity()).isEqualTo(updateItem.getQuantity());
     }
 
     @Test
     void findItems() {
         //given
-        RequestItemInsertDto insertDto1 = new RequestItemInsertDto("itemA-1", 10000, 10);
-        Item item1 = Item.makeSaveModel(insertDto1);
+        Item item1 = Item.builder()
+                            .itemName("itemA-1")
+                            .price(10000)
+                            .quantity(10)
+                            .build();
 
-        RequestItemInsertDto insertDto2 = new RequestItemInsertDto("itemA-2", 20000, 20);
-        Item item2 = Item.makeSaveModel(insertDto2);
+        Item item2 = Item.builder()
+                            .itemName("itemA-2")
+                            .price(20000)
+                            .quantity(20)
+                            .build();
 
-        RequestItemInsertDto insertDto3 = new RequestItemInsertDto("itemB-1", 30000, 30);
-        Item item3 = Item.makeSaveModel(insertDto3);
+        Item item3 = Item.builder()
+                            .itemName("itemB-1")
+                            .price(30000)
+                            .quantity(30)
+                            .build();
 
         itemRepository.save(item1);
         itemRepository.save(item2);
@@ -118,7 +135,6 @@ class ItemRepositoryTest {
     void findItemSearch(String itemName, Integer maxPrice, Item... items) {
         List<Item> result = itemRepository.findAll(new ItemSearchCondition(itemName, maxPrice));
         System.out.println("result = " + result);
-
         assertThat(result).containsExactly(items);  // 객체 비교를 할 때에는 참조 주소로 비교, @EqualsAndHashCode로 해결
     }
 }

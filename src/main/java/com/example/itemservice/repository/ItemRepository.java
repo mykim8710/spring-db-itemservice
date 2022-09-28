@@ -8,9 +8,9 @@ import java.util.Optional;
 
 public interface ItemRepository {
 
-    Item save(Item insertItem);
+    Item save(Item item);
 
-    void update(Item updateItem);
+    void update(Item item);
 
     Optional<Item> findById(Long id);
 
