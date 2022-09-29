@@ -121,3 +121,19 @@ create table item (
     - 단건조회
     - 목록조회(jpql)
     - 삭제
+5. Spring Data JPA
+- Spring Data : 데이터를 어딘가(??)에 저장하고 조회하고(CRUD)….에 대해 추상화(공통화)하여 → 인터페이스 제공
+  - Spring Data JPA, Spring Data mongo, Spring Data redis….
+- Spring Data JPA 적용
+  - SpringDataJpaItemRepository 구현
+    - ItemService는 ItemRepository에 의존하기 때문에 ItemService에서 SpringDataJpaItemRepository를 그대로 사용할 수 없다.
+    - JpaItemRepositoryV2를 구현하여 ItemrRepository와 SpringDataJpaItemRepository사이를 맞추기 위한 어댑터 처럼 사용된다.
+      - save()  :  JpaRepository
+      - update()
+      - findById() : JpaRepository
+      - findAll() : SpringDataJpaItemRepository
+        - List<Item> findByItemNameLike(String itemName);
+        - List<Item> findByPriceLessThanEqual(Integer price);
+        - List<Item> findByItemNameLikeAndPriceLessThanEqual(String itemName, Integer price); : 쿼리메서드
+        - @Query("select i from Item i where i.itemName like :itemName and i.price <= :price")
+          List<Item> findItems(@Param("itemName") String itemName, @Param("price") Integer price); : 쿼리 직접 실행
