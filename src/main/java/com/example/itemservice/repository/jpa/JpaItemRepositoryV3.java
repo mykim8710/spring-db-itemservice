@@ -73,13 +73,12 @@ public class JpaItemRepositoryV3 implements ItemRepository  {
     public List<Item> findAll(ItemSearchCondition condition) {
         String itemName = condition.getItemName();
         Integer maxPrice = condition.getMaxPrice();
-        List<Item> result = query
+
+        return query
                 .select(item)
                 .from(item)
                 .where(likeItemName(itemName), maxPrice(maxPrice))
                 .fetch();
-
-        return result;
     }
 
     private BooleanExpression likeItemName(String itemName) {
