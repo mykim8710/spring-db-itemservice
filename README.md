@@ -12,11 +12,10 @@
     - Artifact: item-service
     - Name: spring-db-itemservice
     - Package name: com.example.itemservice
-- Dependencies: **Spring Web**, **Thymeleaf**, **Lombok**
+- Dependencies: **Spring Web**, **Thymeleaf**, **Lombok**, **H2 Database**, **JdbcTemplate**, **MyBatis**, **Spring Data JPA**, **Querydsl**
 - DB : H2 database
 
 ## Package Design
-- start
 ```
 └── src
     ├── main
