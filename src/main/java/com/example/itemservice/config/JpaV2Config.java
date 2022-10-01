@@ -2,8 +2,8 @@ package com.example.itemservice.config;
 
 import com.example.itemservice.repository.ItemRepository;
 import com.example.itemservice.repository.jpa.JpaItemRepositoryV3;
-import com.example.itemservice.repository.v2.ItemQuerydslRepositoryV2;
-import com.example.itemservice.repository.v2.ItemRepositoryV2;
+import com.example.itemservice.repository.jpav2.ItemQuerydslRepositoryV2;
+import com.example.itemservice.repository.jpav2.ItemRepositoryV2;
 import com.example.itemservice.service.ItemService;
 import com.example.itemservice.service.ItemServiceV2;
 import lombok.RequiredArgsConstructor;

@@ -23,18 +23,43 @@
     │   ├── java
     │   │   └── com.example.itemservice
     │   │               ├── config
-    │   │               │     └── MemoryConfig(C) 
+    │   │               │     ├── MemoryConfig(C)
+    │   │               │     ├── JdbcTemplateV1Config(C)
+    │   │               │     ├── JdbcTemplateV2Config(C)
+    │   │               │     ├── JdbcTemplateV3Config(C)
+    │   │               │     ├── JpaConfig(C)
+    │   │               │     ├── JpaV2Config(C)
+    │   │               │     ├── MybatisConfig(C)
+    │   │               │     ├── QuerydslConfig(C)
+    │   │               │     └── SpringDataJpaConfig(C)
     │   │               ├── domain
     │   │               │     ├── Item(C)           
     │   │               │     └── ItemSearchCondition(C) 
     │   │               ├── exception
     │   │               │     └── NotFoundException(C) 
-    │   │               ├── repository
-    │   │               │     ├── ItemRepository(I) 
-    │   │               │     └── MemoryItemRepository(C)
+    │   │               ├── repository 
+    │   │               │     ├── memory
+    │   │               │     │     └── MemoryItemRepository(C)
+    │   │               │     ├── jdbctemplate
+    │   │               │     │     ├── JdbcTemplateItemRepositoryV1(C)
+    │   │               │     │     ├── JdbcTemplateItemRepositoryV2(C)
+    │   │               │     │     └── JdbcTemplateItemRepositoryV3(C)
+    │   │               │     ├── mybatis
+    │   │               │     │     ├── ItemMapper(I)
+    │   │               │     │     └── MybatisItemRepository(C)
+    │   │               │     ├── jpa
+    │   │               │     │     ├── SpringDataJpaItemRepository(I)
+    │   │               │     │     ├── JpaItemRepositoryV1(I)
+    │   │               │     │     ├── JpaItemRepositoryV2(I)
+    │   │               │     │     └── JpaItemRepositoryV3(C)
+    │   │               │     ├── jpav2
+    │   │               │     │     ├── ItemRepositoryV2(I)
+    │   │               │     │     └── ItemQuerydslRepositoryV2(C)
+    │   │               │      └── ItemRepository(I) 
     │   │               ├── service
-    │   │               │     ├── ItemService(I)           
-    │   │               │     └── ItemServiceImplV1(C) 
+    │   │               │     ├── ItemService(I)
+    │   │               │     ├── ItemServiceV1(C)           
+    │   │               │     └── ItemServiceV2(C) 
     │   │               ├──  web
     │   │               │      ├── controller
     │   │               │      │     ├── HomeController(C)
@@ -49,6 +74,8 @@
     │   │               ├── TestDataInit(C)
     │   │               └── ItemServiceApplication(C)
     │   └── resource
+    │       ├── mapper
+    │       │     └──  ItemMapper.xml
     │       ├── static
     │       │     ├──  css 
     │       │     │      └── bootstrap.min.css
@@ -63,9 +90,14 @@
     │       └── application.properties
     ├── test
     │   ├── java
-    │   │   └── com.example.itemservice
-    │   │                       └── repository
-    │   │                                └── ItemRepositoryTest(C)
+    │   │     ├── com.example.itemservice
+    │   │                        ├── repository
+    │   │                        │        ├── ItemRepositoryTest(C)
+    │   │                        │        └── ItemRepositoryV2Test(C)
+    │   │                        └── ItemServiceApplicationTests(C)
+    │   ├── resource
+    │   │     ├── application.properties
+    │   │     └── schema.sql
 ```
 
 ```

@@ -1,4 +1,4 @@
-package com.example.itemservice.repository.v2;
+package com.example.itemservice.repository.jpav2;
 
 import com.example.itemservice.domain.Item;
 import com.example.itemservice.domain.ItemSearchCondition;

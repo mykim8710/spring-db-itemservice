@@ -1,9 +1,7 @@
 package com.example.itemservice;
 
 import com.example.itemservice.domain.Item;
-import com.example.itemservice.repository.ItemRepository;
-import com.example.itemservice.repository.v2.ItemRepositoryV2;
-import com.example.itemservice.web.dto.request.RequestItemInsertDto;
+import com.example.itemservice.repository.jpav2.ItemRepositoryV2;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;

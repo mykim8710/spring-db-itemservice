@@ -1,10 +1,7 @@
 package com.example.itemservice;
 
 import com.example.itemservice.config.JpaV2Config;
-import com.example.itemservice.config.QuarydslConfig;
-import com.example.itemservice.config.SpringDataJpaConfig;
-import com.example.itemservice.repository.ItemRepository;
-import com.example.itemservice.repository.v2.ItemRepositoryV2;
+import com.example.itemservice.repository.jpav2.ItemRepositoryV2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
