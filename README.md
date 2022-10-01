@@ -137,3 +137,8 @@ create table item (
         - List<Item> findByItemNameLikeAndPriceLessThanEqual(String itemName, Integer price); : 쿼리메서드
         - @Query("select i from Item i where i.itemName like :itemName and i.price <= :price")
           List<Item> findItems(@Param("itemName") String itemName, @Param("price") Integer price); : 쿼리 직접 실행
+6. Querydsl
+- Querydsl 설정
+- Querydsl 적용
+- Spring Data Jpa, Querydsl용 Repository 분리
+  - TestCode 정의

@@ -94,11 +94,6 @@ public class JpaItemRepositoryV3 implements ItemRepository  {
         return null;
     }
 
-
-
-
-
-
     @Override
     public void delete(Long itemId) {
         Item findItem = em.find(Item.class, itemId);

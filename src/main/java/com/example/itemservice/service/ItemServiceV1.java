@@ -9,18 +9,23 @@ import com.example.itemservice.web.dto.request.RequestItemUpdateDto;
 import com.example.itemservice.domain.Item;
 import com.example.itemservice.web.dto.response.ResponseItemSelectDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//@Service
+@Slf4j
+@Service
 @RequiredArgsConstructor
-public class ItemServiceImplV1 implements ItemService {
+public class ItemServiceV1 implements ItemService {
 
     private final ItemRepository itemRepository;
 
     @Override
+    @Transactional
     public Long save(RequestItemInsertDto dto) {
         Item item = Item.builder()
                             .itemName(dto.getItemName())
@@ -31,6 +36,7 @@ public class ItemServiceImplV1 implements ItemService {
     }
 
     @Override
+    @Transactional
     public void update(Long itemId, RequestItemUpdateDto dto) {
         Item item = Item.builder()
                             .id(itemId)
@@ -55,9 +61,12 @@ public class ItemServiceImplV1 implements ItemService {
 
     @Override
     public List<ResponseItemSelectDto> findItems(RequestItemSelectDto selectDto) {
-        List<ResponseItemSelectDto> responseItemSelectDtos = new ArrayList<>();
-        List<Item> items = itemRepository.findAll(ItemSearchCondition.makeItemSearchCondition(selectDto));
+        List<Item> items = itemRepository.findAll(ItemSearchCondition.builder()
+                                                                        .itemName(selectDto.getItemName())
+                                                                        .maxPrice(selectDto.getMaxPrice())
+                                                                        .build());
 
+        List<ResponseItemSelectDto> responseItemSelectDtos = new ArrayList<>();
         if(items.size() > 0){
             responseItemSelectDtos.addAll(items
                                             .stream()
@@ -75,6 +84,7 @@ public class ItemServiceImplV1 implements ItemService {
     }
 
     @Override
+    @Transactional
     public void delete(Long itemId) {
         itemRepository.delete(itemId);
     }

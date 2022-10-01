@@ -2,6 +2,7 @@ package com.example.itemservice;
 
 import com.example.itemservice.domain.Item;
 import com.example.itemservice.repository.ItemRepository;
+import com.example.itemservice.repository.v2.ItemRepositoryV2;
 import com.example.itemservice.web.dto.request.RequestItemInsertDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +13,8 @@ import org.springframework.context.event.EventListener;
 @RequiredArgsConstructor
 public class TestDataInit {
 
-    private final ItemRepository itemRepository;
+    //private final ItemRepository itemRepository;
+    private final ItemRepositoryV2 itemRepository;  //v2 init
 
     /**
      * 확인용 초기 데이터 추가

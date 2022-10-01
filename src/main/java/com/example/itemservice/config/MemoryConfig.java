@@ -3,7 +3,7 @@ package com.example.itemservice.config;
 import com.example.itemservice.repository.ItemRepository;
 import com.example.itemservice.repository.memory.MemoryItemRepository;
 import com.example.itemservice.service.ItemService;
-import com.example.itemservice.service.ItemServiceImplV1;
+import com.example.itemservice.service.ItemServiceV1;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,7 +12,7 @@ public class MemoryConfig {
 
     @Bean
     public ItemService itemService() {
-        return new ItemServiceImplV1(itemRepository());
+        return new ItemServiceV1(itemRepository());
     }
 
     @Bean

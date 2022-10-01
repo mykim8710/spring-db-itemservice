@@ -1,8 +1,10 @@
 package com.example.itemservice;
 
+import com.example.itemservice.config.JpaV2Config;
 import com.example.itemservice.config.QuarydslConfig;
 import com.example.itemservice.config.SpringDataJpaConfig;
 import com.example.itemservice.repository.ItemRepository;
+import com.example.itemservice.repository.v2.ItemRepositoryV2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,7 +19,8 @@ import org.springframework.context.annotation.Profile;
 //@Import(MyBatisConfig.class)
 //@Import(JpaConfig.class)
 //@Import(SpringDataJpaConfig.class)
-@Import(QuarydslConfig.class)
+//@Import(QuarydslConfig.class)
+@Import(JpaV2Config.class)
 @Slf4j
 @SpringBootApplication(scanBasePackages = "com.example.itemservice.web")
 public class ItemServiceApplication {
@@ -28,9 +31,10 @@ public class ItemServiceApplication {
 
 	@Bean
 	@Profile("local")
-	public TestDataInit testDataInit(ItemRepository itemRepository) {
-		return new TestDataInit(itemRepository);
+	public TestDataInit testDataInit(ItemRepositoryV2 itemRepositoryV2) {
+		return new TestDataInit(itemRepositoryV2);
 	}
+
 
 	/*@Bean
 	@Profile("test")
